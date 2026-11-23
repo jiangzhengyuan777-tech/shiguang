@@ -45,6 +45,14 @@
 
 **部署**：Docker · Docker Compose · Nginx
 
+## 🏗 系统架构
+
+![系统架构](docs/screenshots/architecture.png)
+
+[**查看可交互版本**](https://jiangzhengyuan777-tech.github.io/shiguang/architecture.html) — 支持缩放、路径高亮、深浅色切换与导出
+
+一条主链路：**创作者 → 前端 → API → 多智能体编排 → 大模型**，配图服务挂在编排器上，Redis 存登录态，MySQL 落文章与执行日志，热点网页由 API 抓取后作为素材注入 Prompt。
+
 ## 🚀 快速开始（Docker）
 
 ```bash
