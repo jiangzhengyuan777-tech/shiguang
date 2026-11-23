@@ -1,0 +1,39 @@
+# ---------- 依赖 ----------
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ---------- 构建产物 ----------
+dist/
+build/
+*.log
+
+# ---------- 环境变量（内含密钥，务必不要提交）----------
+.env
+.env.local
+.env.*.local
+**/.env
+# 但保留示例文件
+!.env.example
+!**/.env.example
+
+# ---------- 数据备份 ----------
+backup/
+
+# ---------- 编辑器 / 系统 ----------
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---------- 其它 ----------
+*.tmp
+*.bak
+
+# ---------- 个人文件（简历等，不公开）----------
+RESUME*.md

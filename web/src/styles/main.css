@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #fdfbf7;
+  --paper: #ffffff;
+  --ink: #2b2118;
+  --muted: #8a7e70;
+  --line: #f0e6da;
+  --coral: #ff6b4a;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 纸张纹理感的背景（很淡） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 107, 74, 0.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+  z-index: 0;
+}
+
+@layer components {
+  .card {
+    @apply bg-paper rounded-card border border-line shadow-soft;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium
+           transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-coral text-white hover:bg-coral-dark shadow-soft hover:shadow-lift;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-ink border border-line hover:border-coral hover:text-coral;
+  }
+
+  .btn-soft {
+    @apply btn bg-coral-soft text-coral hover:bg-coral-light;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line bg-paper px-4 py-2.5 text-sm text-ink
+           placeholder:text-muted/60 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/15;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-lg px-2 py-0.5 text-xs font-medium;
+  }
+
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-muted mb-2;
+  }
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e4d8c9;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 文章正文（Markdown 渲染） */
+.prose-shiguang h1 { font-size: 1.6rem; font-weight: 700; margin: 1.6rem 0 1rem; }
+.prose-shiguang h2 {
+  font-size: 1.25rem; font-weight: 700; margin: 1.6rem 0 0.8rem;
+  padding-left: 0.75rem; border-left: 3px solid var(--coral); line-height: 1.5;
+}
+.prose-shiguang h3 { font-size: 1.08rem; font-weight: 600; margin: 1.2rem 0 0.6rem; }
+.prose-shiguang p { margin: 0 0 1rem; line-height: 1.85; color: #3a2f24; }
+.prose-shiguang ul, .prose-shiguang ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+.prose-shiguang li { margin-bottom: 0.4rem; line-height: 1.8; }
+.prose-shiguang blockquote {
+  margin: 0 0 1rem; padding: 0.8rem 1rem; border-left: 3px solid var(--coral);
+  background: #fff7f3; color: #6b5c4d; border-radius: 0 8px 8px 0;
+}
+.prose-shiguang img { display: block; margin: 1.2rem auto; max-width: 100%; border-radius: 12px; }
+.prose-shiguang strong { color: var(--ink); font-weight: 700; }
+.prose-shiguang hr { border: none; border-top: 1px solid var(--line); margin: 1.6rem 0; }
+.prose-shiguang code {
+  background: #f7f1e9; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;
+}
+
+/* ===== 动效 ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.965) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-fade-in {
+  animation: fadeIn 0.32s ease both;
+}
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 路由切换过渡 */
+.route-enter-active {
+  animation: fadeUp 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.route-leave-active {
+  animation: fadeIn 0.14s ease reverse;
+}
+
+/* 卡片 hover 微抬升（统一） */
+.lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(43, 33, 24, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .route-enter-active,
+  .route-leave-active {
+    animation: none !important;
+  }
+}
